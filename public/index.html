@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+    <style>
+      html {
+        width: 800px;
+        --s: 50px;
+        --c: #191b22;
+        --_s: calc(2 * var(--s)) calc(2 * var(--s));
+        --_g: 35.36% 35.36% at;
+        --_c: #0000 66%, #20222a 68% 70%, #0000 72%;
+        background: radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s)
+            var(--s) / var(--_s),
+          radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s) /
+            var(--_s),
+          radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0 / var(--_s),
+          radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0 / var(--_s),
+          repeating-conic-gradient(var(--c) 0 25%, #0000 0 50%) 0 0 / var(--_s),
+          radial-gradient(var(--_c)) 0 calc(var(--s) / 2) / var(--s) var(--s)
+            var(--c);
+        background-attachment: fixed;
+      }
+
+      body {
+        margin: 1em 2em;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.6em;
+      }
+
+      input {
+        outline: none;
+        border: 3px solid;
+        border-image-slice: 1;
+        background: transparent;
+        border-image-source: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        color: #bebebe;
+        padding: 10px;
+        width: 100%;
+        font-size: 1em;
+        margin-top: 10px;
+      }
+
+      button {
+        transition: all 300ms;
+        height: 3em;
+        background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        border: 0;
+        color: #20222a;
+        letter-spacing: 2px;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        letter-spacing: 8px;
+      }
+
+      .deco-line {
+        width: 100%;
+        height: 3px;
+        background: #ffffff0d;
+        margin: 25px 0;
+        border-radius: 2px;
+      }
+
+      .header {
+        height: 4em;
+        background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        color: #20222a;
+        font-weight: bold;
+        font-size: 1em;
+      }
+
+      .header__actions {
+        display: flex;
+        justify-content: end;
+        align-content: center;
+        width: 79%;
+      }
+      .header__actions #copiedSpan {
+        opacity: 0;
+        transition: all 300ms;
+        align-self: center;
+        padding-right: 5px;
+      }
+      .icon {
+        cursor: pointer;
+        transition: all 300ms;
+        width: 20px;
+        height: 100%;
+      }
+
+      .icon:hover {
+        transform: scale(1.2);
+      }
+
+      .text-box {
+        margin-top: -3px;
+        padding: 15px 20px;
+        border: solid 3px;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        color: #bebebe;
+      }
+
+      .keySpan {
+        color: #d7d7d7;
+        font-weight: bold;
+        padding-right: 5px;
+        padding-bottom: 5px;
+      }
+
+      .newFieldDiv {
+        padding-bottom: 5px;
+        word-break: break-word;
+      }
+
+      .clipboardFade {
+        opacity: 1 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <label for="sipInput">SIP Message</label>
+      <input id="sipInput" placeholder="INVITE ..." />
+      <button id="beautifyButton">BEAUTIFY</button>
+    </div>
+
+    <div id="render" style="display: none">
+      <div class="deco-line"></div>
+      <div class="header">
+        <div class="header__title">Your beautified message</div>
+        <div class="header__actions">
+          <span id="copiedSpan">Copied to clipboard</span>
+          <svg
+            id="copyToClipboard"
+            height="100%"
+            class="icon"
+            style="
+              fill-rule: evenodd;
+              clip-rule: evenodd;
+              stroke-linejoin: round;
+              stroke-miterlimit: 2;
+            "
+            version="1.1"
+            viewBox="0 0 32 32"
+            width="100%"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:serif="http://www.serif.com/"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <path
+              d="M9,26.971l0,1.006c-0,0.795 0.316,1.558 0.879,2.121c0.562,0.563 1.325,0.879 2.121,0.879c3.076,-0 8.936,-0 12.012,-0c0.796,-0 1.559,-0.316 2.122,-0.879c0.562,-0.563 0.878,-1.326 0.878,-2.121l0,-19.977c0,-0.796 -0.316,-1.559 -0.878,-2.121c-0.563,-0.563 -1.326,-0.879 -2.122,-0.879l-1.012,0l-0,-1.005c0,-0.796 -0.316,-1.559 -0.879,-2.122c-0.562,-0.562 -1.325,-0.878 -2.121,-0.878c-3.076,-0 -8.936,-0 -12.012,-0c-0.796,-0 -1.559,0.316 -2.122,0.878c-0.562,0.563 -0.878,1.326 -0.878,2.122c-0,4.516 -0,15.46 -0,19.976c-0,0.796 0.316,1.559 0.878,2.122c0.563,0.562 1.326,0.878 2.122,0.878l1.012,0Zm16.012,-18.971l0,19.977c0,0.265 -0.105,0.519 -0.293,0.707c-0.187,0.187 -0.441,0.293 -0.707,0.293l-12.012,-0c-0.265,-0 -0.52,-0.106 -0.707,-0.293c-0.188,-0.188 -0.293,-0.442 -0.293,-0.707l-0,-19.977c-0,-0.265 0.105,-0.52 0.293,-0.707c0.187,-0.188 0.442,-0.293 0.707,-0.293l12.012,0c0.266,-0 0.52,0.105 0.707,0.293c0.188,0.187 0.293,0.442 0.293,0.707Zm-4.012,-3l0,-1.005c0,-0.266 -0.105,-0.52 -0.293,-0.708c-0.187,-0.187 -0.442,-0.292 -0.707,-0.292l-12.012,-0c-0.266,-0 -0.52,0.105 -0.707,0.292c-0.188,0.188 -0.293,0.442 -0.293,0.708l-0,19.976c-0,0.266 0.105,0.52 0.293,0.707c0.187,0.188 0.441,0.293 0.707,0.293l1.012,0l-0,-16.971c-0,-0.796 0.316,-1.559 0.879,-2.121c0.562,-0.563 1.325,-0.879 2.121,-0.879l9,0Z"
+            />
+            <path
+              d="M14,10.997l7.995,-0c0.551,-0 1,-0.448 1,-1c-0,-0.552 -0.449,-1 -1,-1l-7.995,-0c-0.552,-0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Z"
+            />
+            <path
+              d="M14,15l7.995,0c0.551,0 1,-0.448 1,-1c-0,-0.552 -0.449,-1 -1,-1l-7.995,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Z"
+            />
+            <path
+              d="M14,19.003l7.995,0c0.551,0 1,-0.448 1,-1c-0,-0.552 -0.449,-1 -1,-1l-7.995,0c-0.552,0 -1,0.448 -1,1c0,0.552 0.448,1 1,1Z"
+            />
+            <path
+              d="M14,23.006l7.995,0c0.551,0 1,-0.448 1,-1c-0,-0.552 -0.449,-1 -1,-1l-7.995,0c-0.552,0 -1,0.448 -1,1c-0,0.552 0.448,1 1,1Z"
+            />
+            <path
+              d="M14,27.009l7.995,0c0.551,0 1,-0.448 1,-1c-0,-0.552 -0.449,-1 -1,-1l-7.995,0c-0.552,0 -1,0.448 -1,1c-0,0.552 0.448,1 1,1Z"
+            />
+            <g id="Icon" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <iframe src="sandbox.html" id="sandbox" style="display: none"></iframe>
+    <script src="popup.js"></script>
+  </body>
+</html>
