@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Sip Magic",
   "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "description": "Simple SIP Beautifier",
   "icons": {
     "48": "icons/sip_extension.png"
   },
