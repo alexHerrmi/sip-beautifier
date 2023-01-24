@@ -30,7 +30,7 @@ const common = {
     rules: [
       // Help webpack in understanding CSS files imported in .js files
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       // Check for images imported in .js files and
@@ -62,7 +62,7 @@ const common = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-  ],
+  ].concat([new MiniCssExtractPlugin()]),
 };
 
 module.exports = common;

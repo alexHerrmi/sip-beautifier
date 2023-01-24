@@ -1,3 +1,4 @@
+require('../src/popup.css')
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('beautifyButton').addEventListener('click', () => {
     const orderedObject = {};
