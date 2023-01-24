@@ -1,11 +1,12 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Sip Magic
+# Sip Magic
 
-My Chrome Extension
+Simple SIP Beautifier
+
+If you don't know what SIP is this extension is not for you.
 
 ## Features
 
-- Feature 1
-- Feature 2
+- Makes SIP Messages readable
 
 ## Install
 
@@ -13,7 +14,7 @@ My Chrome Extension
 
 ## Contribution
 
-Suggestions and pull requests are welcomed!.
+Suggestions and pull requests are welcomed!
 
 ---
 
