@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  margin: 1em 2em;
+  margin: 2em;
 }
 
 .main-form {
@@ -28,10 +28,22 @@ body {
   flex-direction: column;
 
   &__label {
+    position: relative;
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.6em;
+
+    &::after {
+      content: '';
+      width: -webkit-fill-available;
+      position: absolute;
+      height: 3px;
+      margin-left: 10px;
+      background-image: linear-gradient(60deg, #f6d365 0%, #fda085 100%);
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 
   & #main-form__input {
@@ -62,7 +74,9 @@ body {
   }
 }
 
-.render {
+.rendered-div {
+  display: none;
+
   .deco-line {
     width: 100%;
     height: 3px;
@@ -73,6 +87,7 @@ body {
 }
 
 .header {
+  text-transform: uppercase;
   height: 4em;
   background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   display: flex;
@@ -81,20 +96,20 @@ body {
   color: $primary-dark-gray;
   font-weight: bold;
   font-size: 1em;
-}
 
-.header__actions {
-  display: flex;
-  justify-content: end;
-  align-content: center;
-  width: 79%;
-}
+  &__actions {
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    width: 76%;
+  }
 
-.header__actions #copiedSpan {
-  opacity: 0;
-  transition: all 300ms;
-  align-self: center;
-  padding-right: 5px;
+  &__actions #copiedSpan {
+    opacity: 0;
+    transition: all 300ms;
+    align-self: center;
+    padding-right: 5px;
+  }
 }
 
 .icon {
@@ -102,6 +117,10 @@ body {
   transition: all 300ms;
   width: 20px;
   height: 100%;
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke-linejoin: round;
+  stroke-miterlimit: 2;
 }
 
 .icon:hover {
@@ -109,6 +128,7 @@ body {
 }
 
 .text-box {
+  font-size: 1.1em;
   margin-top: -3px;
   padding: 15px 20px;
   border: solid 3px;
