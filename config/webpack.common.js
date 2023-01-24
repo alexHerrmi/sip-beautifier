@@ -30,8 +30,8 @@ const common = {
     rules: [
       // Help webpack in understanding CSS files imported in .js files
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.scss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       // Check for images imported in .js files and
       {
