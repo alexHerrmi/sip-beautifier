@@ -47,6 +47,7 @@ body {
   }
 
   & #main-form__input {
+    resize: none;
     outline: none;
     border: 3px solid;
     border-image-slice: 1;
